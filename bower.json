@@ -1,0 +1,21 @@
+{
+  "name": "8biticon",
+  "version": "0.0.0",
+  "authors": [
+    "saintelama <christoph.walcher@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fabric": "~1.4.5",
+    "noisejs": "*",
+    "tinycolor": "~0.9.17"
+  }
+}

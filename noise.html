@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/fabric/dist/fabric.js"></script>
+    <script src="bower_components/noisejs/index.js"></script>
+    <script src="bower_components/tinycolor/tinycolor.js"></script>
+
+    <script src="js/common.js"></script>
+    <style>
+        body {
+            margin : 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="c"></canvas>
+    <script>
+        var w = 5;
+        var h = 5;
+        var side = 100;
+
+        var canvas = new fabric.Canvas('c');
+        canvas.setWidth(w * side * 2);
+        canvas.setHeight(h * side);
+
+        var bg = getRandomColor();
+        var fg = tinycolor.complement(bg).toHexString();
+
+        var noise = new Noise(Math.random());
+
+        for (var i=0;i<w;i++) {
+            for (var j=0;j<h;j++) {
+                var n = noise.simplex2(i, j);
+
+                var fill = (n + 1)/2 > 0.70?fg:bg;
+
+                canvas.add(new fabric.Rect({
+                    left : side * i,
+                    top : side * j,
+                    width : side,
+                    height : side,
+                    fill : fill
+                }));
+
+                canvas.add(new fabric.Rect({
+                    left : (w * 2 * side) - (side * (i + 1)),
+                    top : side * j,
+                    width : side,
+                    height : side,
+                    fill : fill
+                }));
+            }
+        }
+    </script>
+</body>
+</html>
