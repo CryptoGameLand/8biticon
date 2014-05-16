@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <title></title>
     <script src="bower_components/fabric/dist/fabric.js"></script>
-    <script src="bower_components/noisejs/index.js"></script>
-    <script src="bower_components/tinycolor/tinycolor.js"></script>
-
     <script src="js/common.js"></script>
     <style>
         body {
@@ -16,7 +13,7 @@
     </style>
 </head>
 <body>
-    <p>Generates symmetric bit sculptures using simplex noise center and bottom weighted algorithm with random background and complementary foreground color</p>
+    <p>Generates symmetric bit sculptures using random and a column/random based algorithm with full random foreground/background colors</p>
     <canvas id="c"></canvas>
     <script>
         var w = 5;
@@ -28,30 +25,14 @@
         canvas.setHeight(h * side);
 
         var bg = getRandomColor();
-        var fg = tinycolor.complement(bg).toHexString();
-
-        var noise = new Noise(Math.random());
-
-        // x is 0 -> 0, x is w -> 1
-        var weightX = function(x) {
-            return x / (w - 1);
-        };
-
-        var weightY = function(y) {
-            var hm = (h - 1) % 2 == 0? (h - 1)/2 : Math.floor((h - 1)/2) + 1;
-
-            var v = Math.min(hm, y);
-
-            return Math.abs(Math.abs(v - hm) - hm) / hm;
-        };
+        var fg  = getRandomColor();
 
         for (var i=0;i<w;i++) {
-            for (var j=0;j<h;j++) {
-                var n = (noise.simplex2(i, j) + 1) / 2;
-                var wx = weightX(i);
-                var wy = weightY(j);
+            var colorThreshold = Math.random();
 
-                var fill = (wx * wy) + n > 0.75?fg:bg;
+            for (var j=0;j<h;j++) {
+                var fill = colorThreshold > 0.75?bg:fg;
+                colorThreshold += Math.random() - 0.5;
 
                 canvas.add(new fabric.Rect({
                     left : side * i,

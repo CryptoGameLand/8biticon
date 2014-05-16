@@ -3,8 +3,12 @@ var p = require('gulp-load-plugins')();
 
 gulp.task('dev', function () {
     var server = p.livereload();
-    gulp.watch('**').on('change', function (file) {
-      console.log('changed');
-      server.changed(file.path);
+    gulp.watch('./*.html', function(evt) {
+      console.log('file changed', evt);
+
+      server.changed(evt.path);
     });
+});
+
+gulp.task('default', ['dev'], function() {
 });

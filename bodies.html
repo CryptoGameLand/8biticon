@@ -16,6 +16,7 @@
     </style>
 </head>
 <body>
+    <p>Generates symmetric bit sculptures using simplex noise center weighted algorithm with random background and complementary foreground color</p>
     <canvas id="c"></canvas>
     <script>
         var w = 5;
@@ -36,7 +37,6 @@
             return x / (w - 1);
         };
 
-
         var weightY = function(y) {
             var hm = (h - 1) % 2 == 0? (h - 1)/2 : Math.floor((h - 1)/2) + 1;
 
@@ -50,8 +50,6 @@
                 var n = (noise.simplex2(i, j) + 1) / 2;
                 var wx = weightX(i);
                 var wy = weightY(j);
-
-                console.log('x: ' + i + ' wx:' + wx + ' y: ' + j + ' wy:' + wy + ' n: ' + n);
 
                 var fill = (wx * wy) + n > 0.75?fg:bg;
 

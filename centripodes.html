@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-    <p>Generates symmetric bit sculptures using simplex noise center and bottom weighted algorithm with random background and complementary foreground color</p>
+    <p>WORK IN PROGRESS: Generates symmetric bit sculptures using simplex noise starting from one point in the matrix</p>
     <canvas id="c"></canvas>
     <script>
         var w = 5;
@@ -32,27 +32,32 @@
 
         var noise = new Noise(Math.random());
 
-        // x is 0 -> 0, x is w -> 1
-        var weightX = function(x) {
-            return x / (w - 1);
-        };
+        canvas.setBackgroundColor(bg, function() {
+            canvas.renderAll();
+        });
 
-        var weightY = function(y) {
-            var hm = (h - 1) % 2 == 0? (h - 1)/2 : Math.floor((h - 1)/2) + 1;
+        var ink = Math.random() * 10; // All the ink i have for painting - somewhere between 0 and ten pixels :(
 
-            var v = Math.min(hm, y);
+        var i = w - 1;
+        var j = Math.ceil((h - 1) / 2);
 
-            return Math.abs(Math.abs(v - hm) - hm) / hm;
-        };
+        var fill = fg;
 
-        for (var i=0;i<w;i++) {
-            for (var j=0;j<h;j++) {
-                var n = (noise.simplex2(i, j) + 1) / 2;
-                var wx = weightX(i);
-                var wy = weightY(j);
+        var matrix = [];
 
-                var fill = (wx * wy) + n > 0.75?fg:bg;
+        for (var a=0;a<w;a++) {
+            matrix[a] = [];
 
+            for (var b=0;b<h;b++) {
+                matrix[a][b] = { visited : 0, colored : 0};
+            }
+        }
+
+        while (ink > 0)
+        {
+            var n = noise.simplex2(i, j);
+
+            if (n > 0) {
                 canvas.add(new fabric.Rect({
                     left : side * i,
                     top : side * j,
@@ -61,13 +66,7 @@
                     fill : fill
                 }));
 
-                canvas.add(new fabric.Rect({
-                    left : (w * 2 * side) - (side * (i + 1)),
-                    top : side * j,
-                    width : side,
-                    height : side,
-                    fill : fill
-                }));
+                ink--;
             }
         }
     </script>

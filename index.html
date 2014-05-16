@@ -1,55 +1,101 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <script src="bower_components/fabric/dist/fabric.js"></script>
-    <script src="js/common.js"></script>
+<html lang="en" class="yui3-js-enabled"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="demo, playground and sandbox of 8 bit pattern generation.">
+
+    <title>8biticon</title>
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
+    <link rel="stylesheet" href="http://purecss.io/combo/1.11.5?/css/main-grid.css&/css/layouts/marketing.css">
+
+    <!--[if lt IE 9]>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+    <![endif]-->
     <style>
-        body {
-            margin : 0;
-            padding: 0;
+        .splash-container {
+            background-image: url("img/containerbg.png");
+        }
+
+        img {
+            width: 100%;
+        }
+
+        a {
+            color: #7f8c8d;
+            font-size: 16px;
         }
     </style>
-</head>
 <body>
-    <canvas id="c"></canvas>
-    <script>
-        var w = 5;
-        var h = 5;
-        var side = 100;
 
-        var canvas = new fabric.Canvas('c');
-        canvas.setWidth(w * side * 2);
-        canvas.setHeight(h * side);
 
-        var bg = getRandomColor();
-        var fg  = getRandomColor();
+<div class="splash-container">
+    <div class="splash">
+        <h1 class="splash-head">8biticon</h1>
+        <p class="splash-subhead">
+            demo, playground and sandbox of 8 bit pattern generation.
+        </p>
+    </div>
+</div>
 
-        for (var i=0;i<w;i++) {
-            var colorThreshold = Math.random();
+<div class="content-wrapper">
+    <div class="content">
+        <h2 class="content-head is-center">Experiments</h2>
 
-            for (var j=0;j<h;j++) {
-                var fill = colorThreshold > 0.75?bg:fg;
-                colorThreshold += Math.random() - 0.5;
+        <div class="pure-g">
+            <div class="l-box pure-u-1 pure-u-med-1-2 pure-u-lrg-1-4">
+                <h3 class="content-subhead">
+                    Bodies
+                </h3>
+                <img src="img/bodies.png">
+                <p>
+                    Generates "body" like structures.
+                </p>
+                <p>
+                    <a href="bodies.html">See it in action</a>
+                </p>
+            </div>
+            <div class="l-box pure-u-1 pure-u-med-1-2 pure-u-lrg-1-4">
+                <h3 class="content-subhead">
+                    Feet
+                </h3>
+                <img src="img/feet.png">
+                <p>
+                    Clone of bodies.html to generate structures that have something like feet. <a href="feet.html"></a>
+                </p>
+                <p>
+                    <a href="feet.html">See it in action</a>
+                </p>
+            </div>
+            <div class="l-box pure-u-1 pure-u-med-1-2 pure-u-lrg-1-4">
+                <h3 class="content-subhead">
+                    Noise
+                </h3>
+                <img src="img/bodies.png">
+                <p>
+                    Generates patterns using simple simplex noise. <a href="noise.html"></a>
+                </p>
+                <p>
+                    <a href="noise.html">See it in action</a>
+                </p>
+            </div>
+            <div class="l-box pure-u-1 pure-u-med-1-2 pure-u-lrg-1-4">
+                <h3 class="content-subhead">
+                    Random
+                </h3>
+                <img src="img/random.png">
+                <p>
+                    Generates structures with a algorithm that weights colors per column. <a href="random.html"></a>
+                </p>
+                <p>
+                    <a href="random.html">See it in action</a>
+                </p>
+            </div>
+        </div>
+    </div>
 
-                canvas.add(new fabric.Rect({
-                    left : side * i,
-                    top : side * j,
-                    width : side,
-                    height : side,
-                    fill : fill
-                }));
-
-                canvas.add(new fabric.Rect({
-                    left : (w * 2 * side) - (side * (i + 1)),
-                    top : side * j,
-                    width : side,
-                    height : side,
-                    fill : fill
-                }));
-            }
-        }
-    </script>
-</body>
-</html>
+    <div class="footer l-box is-center">
+        View the source on <a href="https://github.com/saintedlama/8biticon"> github</a>.
+    </div>
+</div>
+</body></html>
