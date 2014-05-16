@@ -9,5 +9,5 @@ Install bower dependencies
 
 Open one of the HTML files in your browser. No HTTP server needed.
 
-Or take a look at the experiments sandbox online [http://8biticon.kirschlimona.de](8biticon.kirschlimona.de)
+Or take a look at the experiments sandbox online [8biticon.kirschlimona.de](http://8biticon.kirschlimona.de)
 
